@@ -1,7 +1,5 @@
 @echo off
-setlocal enabledelayedexpansion
-
-:: Garante que o script rode no diretorio onde ele esta localizado
+setlocal
 cd /d "%~dp0"
 
 echo ========================================
@@ -9,46 +7,27 @@ echo Guardian - Instalacao
 echo ========================================
 echo.
 
-echo Verificando Python...
+echo 1. Verificando Python...
 python --version >nul 2>&1
-if errorlevel 1 (
-    echo ERRO: Python nao encontrado!
-    echo.
-    echo DICA: Voce pode tentar executar o arquivo "setup_system.bat" 
-    echo para instalar o Python e o FFmpeg automaticamente.
-    echo.
-    pause
-    exit /b 1
-)
+if errorlevel 1 goto error_python
 
-:: Cria ambiente virtual se nao existir
-if not exist venv (
-    echo Criando ambiente virtual (venv)...
-    python -m venv venv
-    if errorlevel 1 (
-        echo ERRO: Falha ao criar ambiente virtual!
-        pause
-        exit /b 1
-    )
-)
+if exist venv goto skip_venv
+echo 2. Criando ambiente virtual (venv)...
+python -m venv venv
+if errorlevel 1 goto error_venv
 
-echo.
-echo Atualizando pip...
+:skip_venv
+echo 3. Atualizando pip...
 venv\Scripts\python.exe -m pip install --upgrade pip
 
-echo.
-echo Instalando dependencias...
+echo 4. Instalando dependencias (isso pode demorar)...
+if not exist requirements.txt goto error_reqs
 venv\Scripts\pip install -r requirements.txt
-
-if errorlevel 1 (
-    echo ERRO: Falha ao instalar dependencias!
-    pause
-    exit /b 1
-)
+if errorlevel 1 goto error_pip
 
 echo.
 echo ========================================
-echo Instalacao concluida!
+echo Instalacao concluida com sucesso!
 echo ========================================
 echo.
 echo Proximos passos:
@@ -57,3 +36,30 @@ echo 2. Configure o Google Drive (veja README.md)
 echo 3. Execute start.bat para iniciar
 echo.
 pause
+exit /b 0
+
+:error_python
+echo.
+echo ERRO: Python nao encontrado no seu PATH!
+echo Por favor, instale o Python e marque a opcao "Add to PATH".
+pause
+exit /b 1
+
+:error_venv
+echo.
+echo ERRO: Falha ao criar o ambiente virtual (venv).
+pause
+exit /b 1
+
+:error_reqs
+echo.
+echo ERRO: Arquivo requirements.txt nao encontrado.
+pause
+exit /b 1
+
+:error_pip
+echo.
+echo ERRO: Falha ao instalar as dependencias. 
+echo Verifique sua conexao com a internet ou se o Python 3.13 possui suporte para todas as libs.
+pause
+exit /b 1

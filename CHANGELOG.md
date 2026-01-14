@@ -1,11 +1,12 @@
 # Changelog - Guardian
 
-## [1.0.1] - 2026-01-14
+## [1.0.2] - 2026-01-14
 
 ### Fixed
-- Erro de arquivo não encontrado (`requirements.txt`) no `install.bat`.
-- Scripts de automação agora forçam o diretório de trabalho correto.
-- Implementação de ambiente virtual (venv) para isolamento de dependências.
+- Erro de sintaxe "... foi inesperado" no `install.bat` causado por caracteres especiais.
+- Incompatibilidade de pacotes (`scipy`, `numpy`) com Python 3.13 através de requisitos flexíveis.
+
+## [1.0.1] - 2026-01-14
 
 ## [1.0.0] - 2026-01-14
 
