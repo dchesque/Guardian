@@ -1,0 +1,3 @@
+@echo off
+echo Iniciando Guardian...
+pythonw src/main.py

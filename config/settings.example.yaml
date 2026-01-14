@@ -1,0 +1,88 @@
+# ============================================================
+# VOICE & SCREEN ASSISTANT - CONFIGURAÇÕES (EXEMPLO)
+# ============================================================
+
+# ===== API OPENROUTER =====
+openrouter:
+  api_key: "YOUR_OPENROUTER_API_KEY"
+
+# ===== MODELOS LLM =====
+models:
+  transcription: "groq/whisper-large-v3"
+  screen_analysis: "google/gemini-2.0-flash-lite-001"
+  summary: "openai/gpt-4o-mini"
+
+# ===== MÓDULO DE ÁUDIO =====
+audio:
+  enabled: true
+  input_device: null
+  chunk_duration_minutes: 10
+  format: "mp3"
+  quality: "low"
+
+# ===== MÓDULO DE TELA =====
+screen:
+  enabled: true
+  capture_interval_seconds: 30
+  monitor: 0
+  format: "jpg"
+  quality: 70
+
+# ===== MÓDULO DE TECLADO =====
+keyboard:
+  enabled: true
+  save_interval_minutes: 5
+  log_retention_days: 7
+
+# ===== AGENDAMENTO =====
+schedule:
+  summary_time: "22:00"
+  timezone: "America/Sao_Paulo"
+
+# ===== GOOGLE DRIVE =====
+google_drive:
+  enabled: true
+  credentials_file: "config/credentials/google_drive.json"
+  token_file: "config/credentials/token.json"
+  folder_name: "Assistente Guardian"
+  backup:
+    audio: true
+    screenshots: false
+    transcriptions: true
+    screen_analysis: true
+    summaries: true
+  cleanup:
+    enabled: true
+    audio_retention_days: 30
+    screenshots_retention_days: 7
+
+# ===== EMAIL =====
+email:
+  enabled: true
+  smtp_server: "smtp.gmail.com"
+  smtp_port: 587
+  use_tls: true
+  sender_email: "your_email@gmail.com"
+  sender_password: "your_app_password"
+  recipient_email: "your_email@gmail.com"
+  send_daily_summary: true
+  send_on_error: true
+
+# ===== PROMPT =====
+prompt:
+  file: "config/prompt.txt"
+  screen_analysis_file: "config/screen_prompt.txt"
+  keyboard_analysis_file: "config/keyboard_prompt.txt"
+
+# ===== SISTEMA =====
+system:
+  start_with_windows: true
+  start_minimized: true
+  log_level: "INFO"
+  log_retention_days: 7
+
+# ===== PRIVACIDADE =====
+privacy:
+  pause_on_lock: true
+  excluded_apps: []
+  excluded_windows: []

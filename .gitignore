@@ -1,0 +1,25 @@
+# Configuration
+config/settings.yaml
+config/credentials/
+
+# Data (Sensitive user data)
+data/screen_analysis/
+data/summaries/
+data/temp_audio/
+data/temp_screenshots/
+data/test_audio/
+data/transcriptions/
+
+# Logs
+logs/
+
+# Python
+__pycache__/
+*.pyc
+.env
+.venv
+venv/
+# Archives
+*.rar
+*.zip
+*.7z
