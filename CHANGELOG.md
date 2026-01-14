@@ -1,5 +1,12 @@
 # Changelog - Guardian
 
+## [1.0.1] - 2026-01-14
+
+### Fixed
+- Erro de arquivo não encontrado (`requirements.txt`) no `install.bat`.
+- Scripts de automação agora forçam o diretório de trabalho correto.
+- Implementação de ambiente virtual (venv) para isolamento de dependências.
+
 ## [1.0.0] - 2026-01-14
 
 ### Added

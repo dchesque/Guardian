@@ -1,4 +1,9 @@
 @echo off
+setlocal enabledelayedexpansion
+
+:: Garante que o script rode no diretorio onde ele esta localizado
+cd /d "%~dp0"
+
 echo ========================================
 echo Guardian - Instalacao
 echo ========================================
@@ -16,9 +21,24 @@ if errorlevel 1 (
     exit /b 1
 )
 
+:: Cria ambiente virtual se nao existir
+if not exist venv (
+    echo Criando ambiente virtual (venv)...
+    python -m venv venv
+    if errorlevel 1 (
+        echo ERRO: Falha ao criar ambiente virtual!
+        pause
+        exit /b 1
+    )
+)
+
+echo.
+echo Atualizando pip...
+venv\Scripts\python.exe -m pip install --upgrade pip
+
 echo.
 echo Instalando dependencias...
-pip install -r requirements.txt
+venv\Scripts\pip install -r requirements.txt
 
 if errorlevel 1 (
     echo ERRO: Falha ao instalar dependencias!
